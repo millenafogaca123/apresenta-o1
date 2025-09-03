@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apresentação – Coin Runner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b1220;--card:#0f1931;--muted:#9db0d8;--text:#eaf0ff;--accent:#ff6b6b;--accent2:#ee5a24}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(1200px 800px at 80% 10%,#152243 0%,#0b1220 55%);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow:hidden}
+    .deck{position:relative;width:100vw;height:100vh}
+    .slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 64px;gap:24px;opacity:0;transform:scale(.985) translateY(10px);transition:opacity .3s,transform .35s}
+    .slide.active{opacity:1;transform:scale(1) translateY(0)}
+    .card{max-width:min(1080px,92vw);width:100%;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:40px 48px;box-shadow:0 20px 60px rgba(0,0,0,.35);backdrop-filter:blur(6px)}
+    h1,h2{font-family:"Press Start 2P",monospace;letter-spacing:.5px;margin:0 0 18px}
+    h1{font-size:40px;line-height:1.15}
+    h2{font-size:28px}
+    p{margin:0 0 8px;color:var(--muted);font-size:18px}
+    ul{margin:12px 0 0 0;padding:0 0 0 22px;font-size:18px;line-height:1.6}
+    li{margin:6px 0}
+    .title{display:flex;align-items:center;gap:14px}
+    .badge{font-family:"Press Start 2P",monospace;font-size:12px;padding:8px 12px;border-radius:999px;background:linear-gradient(45deg,var(--accent),var(--accent2));color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+    .gallery{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
+    .shot{width:100%;max-height:520px;object-fit:contain;border:1px solid rgba(255,255,255,.15);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35);background:#0c1633}
+    .footer{position:fixed;left:24px;right:24px;bottom:18px;display:flex;align-items:center;justify-content:space-between;color:#a9b4d6;font-size:14px}
+    .progress{height:6px;width:38%;background:rgba(255,255,255,.09);border-radius:999px;overflow:hidden}
+    .bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
+    .help{position:fixed;right:18px;top:18px;display:flex;gap:8px}
+    .key{border:1px solid rgba(255,255,255,.25);border-bottom-width:3px;padding:6px 10px;border-radius:8px;font-weight:700;color:#d9e3ff;background:#0e1730}
+    .logo{position:fixed;left:18px;top:18px;display:flex;align-items:center;gap:10px}
+    .dot{width:14px;height:14px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent),var(--accent2));box-shadow:0 0 18px rgba(255,107,107,.8)}
+    .brand{font-family:"Press Start 2P";font-size:13px;letter-spacing:1px;color:#fff}
+    @media (max-width:720px){.card{padding:26px 22px}h1{font-size:28px}h2{font-size:22px}ul,p{font-size:16px}}
+    @media print{body{overflow:visible}.slide{position:relative;page-break-after:always;opacity:1!important;transform:none!important}.footer,.help,.logo{display:none}}
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <section class="slide active">
+      <div class="card">
+        <div class="title"><span class="badge">Coin Runner</span></div>
+        <h1>Projeto Coin Runner</h1>
+        <p>Um jogo web desenvolvido com <strong>HTML</strong>, <strong>CSS</strong> e <strong>JavaScript</strong>.</p>
+        <ul>
+          <li>Objetivo: coletar moedas e desviar de obstáculos</li>
+          <li>Tempo de partida: <strong>60 segundos</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <h2>Objetivo do Jogo</h2>
+        <ul>
+          <li>Controlar o jogador</li>
+          <li>Coletar moedas para ganhar pontos</li>
+          <li>Desviar de obstáculos</li>
+          <li>Jogar dentro do limite de 60s</li>
+        </ul>
+        <div class="gallery">
+          <img class="shot" src="prints/Captura.jpg" alt="Print do jogo">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <h2>Estrutura (HTML)</h2>
+        <ul>
+          <li><code>player</code> – personagem</li>
+          <li><code>score-display</code> – pontuação</li>
+          <li><code>timer-display</code> – tempo</li>
+          <li><code>start-screen</code> – tela inicial</li>
+          <li><code>game-over-screen</code> – tela de fim</li>
+        </ul>
+        <div class="gallery">
+          <img class="shot" src="prints/html.jpg" alt="Print do HTML">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <h2>Aparência (CSS)</h2>
+        <ul>
+          <li>Área do jogo e layout</li>
+          <li>Player, moeda e obstáculos</li>
+          <li>Animações com <code>@keyframes</code></li>
+        </ul>
+        <div class="gallery">
+          <img class="shot" src="prints/css.jpg" alt="Print do CSS">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <h2>Lógica (JavaScript)</h2>
+        <ul>
+          <li><code>startGame()</code>, <code>endGame()</code>, <code>restartGame()</code></li>
+          <li><code>spawnCoins()</code> e <code>collectCoin()</code></li>
+          <li><code>spawnObstacles()</code> e <code>checkCollision()</code></li>
+          <li><code>startGameTimer()</code></li>
+        </ul>
+        <div class="gallery">
+          <img class="shot" src="prints/java.jpg" alt="Print do JavaScript">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <h2>Fluxo do Jogo</h2>
+        <ul>
+          <li>Tela inicial → Jogar</li>
+          <li>Movimentação do jogador</li>
+          <li>Moedas caem → pegar = +10</li>
+          <li>Obstáculos caem → colisão = Game Over</li>
+          <li>Tempo 0 → pontuação final</li>
+        </ul>
+        <div class="gallery">
+          <img class="shot" src="prints/jogoemacao.jpg" alt="Print do jogo em ação">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="card">
+        <h2>Conclusão</h2>
+        <ul>
+          <li>HTML – Estrutura</li>
+          <li>CSS – Aparência</li>
+          <li>JavaScript – Lógica</li>
+          <li>Resultado: jogo funcional</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="logo"><span class="dot"></span><span class="brand">Coin Runner</span></div>
+  <div class="help"><span class="key">←</span><span class="key">→</span><span class="key">Espaço</span></div>
+  <div class="footer">
+    <div>Apresentação • Millena</div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div id="counter">1 / 7</div>
+  </div>
+
+  <script>
+    const slides=[...document.querySelectorAll('.slide')];
+    let i=0;
+    const bar=document.getElementById('bar');
+    const counter=document.getElementById('counter');
+    function show(idx){i=Math.max(0,Math.min(idx,slides.length-1));slides.forEach((s,k)=>s.classList.toggle('active',k===i));bar.style.width=((i+1)/slides.length)*100+'%';counter.textContent=(i+1)+' / '+slides.length}
+    function next(){show(i+1)}
+    function prev(){show(i-1)}
+    addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}});
+    addEventListener('click',e=>{if(e.shiftKey)prev();else next()});
+    addEventListener('touchstart',e=>{const x=e.touches[0].clientX;const mid=innerWidth/2;(x>mid)?next():prev()});
+    show(0);
+  </script>
+</body>
+</html>
